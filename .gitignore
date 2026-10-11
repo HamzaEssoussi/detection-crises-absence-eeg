@@ -4,3 +4,8 @@ data_csv/
 *.accdb
 venv/
 __pycache__/
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+.streamlit/secrets.toml
