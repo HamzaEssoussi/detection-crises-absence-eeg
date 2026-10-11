@@ -1,0 +1,226 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap');
+
+:root {
+    --primary: #00a0c6;
+    --primary-dark: #0087a8;
+    --primary-soft: rgba(0, 160, 198, 0.10);
+    --bg: #ffffff;
+    --bg-alt: #f5f5f5;
+    --border: #e3e3e3;
+    --text: #1a1a1a;
+    --text-muted: #666666;
+    --danger: #e5484d;
+    --danger-soft: rgba(229, 72, 77, 0.10);
+    --hero: #2b3036;
+}
+
+/* ========== EN-TETE STREAMLIT ========== */
+header[data-testid="stHeader"] {
+    background: transparent !important;
+    min-height: 2.75rem !important;
+}
+div[data-testid="stDecoration"] { display: none !important; }
+#MainMenu { visibility: hidden; }
+footer { visibility: hidden; }
+
+.main .block-container {
+    padding-top: 0.5rem !important;
+    padding-bottom: 1rem !important;
+    max-width: 100% !important;
+}
+
+/* ========== FOND GENERAL ========== */
+html, body, [class*="css"], .stApp {
+    font-family: 'Roboto', Arial, Helvetica, sans-serif;
+}
+.stApp {
+    background-color: var(--bg);
+    color: var(--text);
+    border-top: 6px solid var(--primary);
+}
+
+/* ========== TITRES ========== */
+h1, h2, h3, h4, .section-title {
+    font-family: 'Roboto', Arial, sans-serif;
+    font-weight: 700;
+    letter-spacing: 0;
+    text-transform: none;
+    color: var(--text) !important;
+}
+
+/* ========== SIDEBAR ========== */
+section[data-testid="stSidebar"],
+section[data-testid="stSidebar"] > div {
+    background-color: rgba(245, 245, 245, 0.78) !important;
+}
+section[data-testid="stSidebar"] {
+    border-right: 1px solid var(--border);
+}
+section[data-testid="stSidebar"] label {
+    font-weight: 500 !important;
+}
+section[data-testid="stSidebar"] hr {
+    border-color: var(--border) !important;
+}
+section[data-testid="stSidebar"] .section-title {
+    color: var(--primary) !important;
+    font-size: 0.95rem !important;
+    border-bottom: 2px solid var(--primary-soft);
+    padding-bottom: 4px;
+    margin-bottom: 10px;
+}
+
+/* ========== BANDEAU DE TITRE (style "hero" du site) ========== */
+.app-header {
+    position: relative;
+    padding: 36px 40px;
+    margin-bottom: 20px;
+    margin-top: 8px;
+    background: linear-gradient(120deg, #343a40 0%, var(--hero) 100%);
+    border-radius: 4px;
+    overflow: hidden;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+}
+.app-header .eyebrow {
+    color: var(--primary) !important;
+    font-weight: 700;
+    font-size: 0.78rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+}
+.app-title {
+    font-size: 2.4rem;
+    line-height: 1.1;
+    margin: 8px 0 14px 0;
+    color: #ffffff !important;
+    font-weight: 700;
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+}
+.app-subtitle {
+    display: inline-block;
+    background-color: var(--primary);
+    color: #ffffff !important;
+    font-weight: 500;
+    font-size: 0.92rem;
+    padding: 8px 18px;
+    border-radius: 999px;
+}
+
+/* ========== SECTIONS ========== */
+.section-block { margin-top: 26px; margin-bottom: 14px; }
+.section-title { font-size: 1.35rem; margin-bottom: 6px; }
+.section-bar {
+    width: 56px;
+    height: 3px;
+    background-color: var(--primary);
+    margin-bottom: 10px;
+}
+.section-desc {
+    color: var(--text-muted) !important;
+    font-size: 0.92rem;
+    max-width: 780px;
+}
+
+/* ========== CALLOUTS ========== */
+.callout {
+    background-color: var(--primary-soft) !important;
+    border: 1px solid rgba(0, 160, 198, 0.35);
+    border-left: 4px solid var(--primary);
+    border-radius: 4px;
+    padding: 16px 20px;
+    font-size: 0.9rem;
+    color: var(--text) !important;
+    margin: 10px 0 18px 0;
+}
+.callout * { color: var(--text) !important; }
+.callout b { color: var(--primary-dark) !important; }
+.callout ul { margin: 6px 0 0 0; padding-left: 18px; }
+.callout li { margin-bottom: 4px; }
+
+.callout-warning {
+    background-color: var(--danger-soft) !important;
+    border: 1px solid rgba(229, 72, 77, 0.35);
+    border-left: 4px solid var(--danger);
+}
+.callout-warning b { color: var(--danger) !important; }
+
+/* ========== LEGENDES ========== */
+.legend-row { display: flex; align-items: flex-start; gap: 10px; margin-bottom: 8px; }
+.swatch { min-width: 12px; height: 12px; border-radius: 3px; margin-top: 4px; }
+.legend-text { color: var(--text-muted) !important; font-size: 0.9rem; }
+.legend-text b { color: var(--text) !important; }
+
+/* ========== METRICS ========== */
+div[data-testid="stMetric"] {
+    background-color: var(--bg) !important;
+    border: 1px solid var(--border);
+    border-left: 4px solid var(--primary);
+    border-radius: 4px;
+    padding: 14px 16px 8px 16px;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.06);
+}
+div[data-testid="stMetricLabel"] {
+    color: var(--text-muted) !important;
+    text-transform: uppercase;
+    font-size: 0.72rem !important;
+    letter-spacing: 0.06em;
+}
+div[data-testid="stMetricValue"] {
+    color: var(--text) !important;
+    font-weight: 700;
+}
+
+/* ========== BOUTONS ========== */
+div[data-testid="stButton"] > button,
+div[data-testid="stDownloadButton"] > button {
+    border-radius: 4px;
+    font-weight: 500;
+    background-color: var(--bg) !important;
+    color: var(--primary) !important;
+    border: 1px solid var(--primary) !important;
+    transition: all 0.2s ease;
+}
+div[data-testid="stButton"] > button p,
+div[data-testid="stDownloadButton"] > button p {
+    color: inherit !important;
+}
+div[data-testid="stButton"] > button:hover,
+div[data-testid="stDownloadButton"] > button:hover {
+    background-color: var(--primary) !important;
+    color: #ffffff !important;
+}
+div[data-testid="stButton"] > button[kind="primary"],
+div[data-testid="stButton"] > button[data-testid="stBaseButton-primary"] {
+    background-color: var(--primary) !important;
+    border-color: var(--primary) !important;
+    color: #ffffff !important;
+    font-weight: 700;
+}
+div[data-testid="stButton"] > button[kind="primary"]:hover,
+div[data-testid="stButton"] > button[data-testid="stBaseButton-primary"]:hover {
+    background-color: var(--primary-dark) !important;
+    border-color: var(--primary-dark) !important;
+}
+
+/* ========== DATAFRAMES ========== */
+div[data-testid="stDataFrame"] {
+    border: 1px solid var(--border);
+    border-radius: 4px;
+}
+
+/* ========== SEPARATEURS ========== */
+hr { border-color: var(--border) !important; }
+
+/* ========== EXPANDER ========== */
+details {
+    background-color: var(--bg) !important;
+    border-radius: 4px;
+    border: 1px solid var(--border);
+}
+details summary { font-weight: 700; }
+
+/* ========== ONGLETS ========== */
+button[data-baseweb="tab"][aria-selected="true"] { color: var(--primary) !important; }
+
+/* ========== BACKGROUND GLOBAL ET BANDEAU (image) ========== */
+/*__BACKGROUND__*/

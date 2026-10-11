@@ -1,0 +1,9 @@
+# Theme natif Streamlit (widgets, sliders, tableaux...) aux couleurs du site.
+# Lancer `streamlit run app.py` depuis la racine du projet pour que ce fichier soit lu.
+[theme]
+base = "light"
+primaryColor = "#00a0c6"
+backgroundColor = "#ffffff"
+secondaryBackgroundColor = "#f5f5f5"
+textColor = "#1a1a1a"
+font = "sans serif"
