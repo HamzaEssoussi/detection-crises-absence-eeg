@@ -15,7 +15,9 @@ from eeg_app.ui import plots
 from eeg_app.ui.components import callout, message_annotations_indisponibles, section
 
 
-NOMS_MODELES = ["Decision Tree", "Random Forest", "KNN", "SVM"]
+NOMS_MODELES = [
+    "Decision Tree", "Random Forest", "KNN", "SVM", "Deep Learning (MLP)",
+]
 
 
 def render(ctx):
@@ -90,7 +92,7 @@ def _formulaire_entrainement(ctx, dataset):
         ]
         mode_decoupage = c2.radio("Decoupage", options)
 
-    balanced = c3.checkbox("Ponderer les classes (class_weight='balanced')", value=False,
+    balanced = c3.checkbox("Ponderer les classes", value=False,
                            help="Utile car les crises sont rares. Non applicable au KNN.")
 
     # ---- 3. Augmentation deja calculee ----
@@ -169,6 +171,8 @@ def _afficher_hyperparametres(modeles_choisis, balanced):
             st.json(GRILLES_GRID_SEARCH[nom])
             if balanced and nom in ("Decision Tree", "Random Forest", "SVM"):
                 st.caption("`class_weight` sera fixe a `'balanced'` (case cochee ci-dessus).")
+            elif balanced and nom == "Deep Learning (MLP)":
+                st.caption("Des poids `sample_weight` equilibrent les classes pendant l'apprentissage.")
             st.markdown("---")
 
         st.markdown(
@@ -330,6 +334,8 @@ def _resume_automatique(res):
             action += " Pour KNN, comparer n_neighbors, weights et metric."
         elif nom == "SVM":
             action += " Pour le SVM, ajuster C, gamma et class_weight."
+        elif nom == "Deep Learning (MLP)":
+            action += " Pour le MLP, comparer la profondeur du reseau, alpha et learning_rate_init."
 
         if scores_modele["Accuracy"] - f1 > 0.2:
             action += " L'Accuracy depasse nettement le F1 : ne pas optimiser l'Accuracy seule, le desequilibre des classes peut la rendre trompeuse."

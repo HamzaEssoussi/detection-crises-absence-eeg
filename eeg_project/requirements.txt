@@ -4,6 +4,6 @@ numpy
 scipy
 matplotlib
 seaborn
-scikit-learn
+scikit-learn>=1.7
 openpyxl
 plotly

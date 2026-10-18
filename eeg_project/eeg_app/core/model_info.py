@@ -30,6 +30,13 @@ DESCRIPTIONS = {
         "<b>Efficace en haute dimension</b>, mais <b>sensible aux hyperparametres</b> C et gamma, "
         "et difficile a interpreter."
     ),
+    "Deep Learning (MLP)": (
+        "Un <b>perceptron multicouche (MLP)</b> apprend des representations non lineaires par "
+        "retropropagation du gradient. Ce reseau utilise deux couches cachees de 64 et 32 neurones "
+        "avec une activation ReLU et l'optimiseur Adam. Les features sont standardisees avant "
+        "l'apprentissage; l'option d'equilibrage applique des poids aux exemples. "
+        "<b>Flexible</b>, mais sensible au volume de donnees et au surapprentissage."
+    ),
 }
 
 # --- Hyperparametres utilises actuellement (valeurs par defaut) ---
@@ -62,6 +69,16 @@ HYPERPARAMS_ACTUELS = {
         "class_weight": "balanced ou None",
         "random_state": 42,
     },
+    "Deep Learning (MLP)": {
+        "hidden_layer_sizes": (64, 32),
+        "activation": "relu",
+        "solver": "adam",
+        "alpha": 0.001,
+        "learning_rate_init": 0.001,
+        "max_iter": 400,
+        "class_weight": "balanced via sample_weight, ou None",
+        "random_state": 42,
+    },
 }
 
 # --- Grilles Grid Search recommandees (pour aller plus loin) ---
@@ -90,5 +107,11 @@ GRILLES_GRID_SEARCH = {
         "gamma": ["scale", "auto", 0.01, 0.1],
         "kernel": ["rbf", "linear"],
         "class_weight": ["balanced", None],
+    },
+    "Deep Learning (MLP)": {
+        "hidden_layer_sizes": [(32,), (64, 32), (128, 64)],
+        "activation": ["relu", "tanh"],
+        "alpha": [0.0001, 0.001, 0.01],
+        "learning_rate_init": [0.0001, 0.001],
     },
 }

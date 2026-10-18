@@ -1,7 +1,8 @@
 # Detection automatique des crises d'absence - EEG
 
 Application Streamlit : visualisation du signal, alignement des crises annotees,
-extraction de features par fenetre et classification (Decision Tree, Random Forest, KNN, SVM).
+extraction de features par fenetre et classification (Decision Tree, Random Forest, KNN,
+SVM et reseau de neurones MLP).
 
 ## Lancer
 
@@ -56,6 +57,15 @@ chacun une interpretation des forces/faiblesses observees ainsi que des pistes d
 reglage. Ces pistes sont des essais a valider, pas des ameliorations garanties. Les
 resultats sont masques lorsque les parametres ou le dataset changent afin d'eviter de
 presenter des scores d'une execution precedente.
+
+Le modele **Deep Learning (MLP)** utilise deux couches cachees (64 puis 32 neurones),
+l'activation ReLU et l'optimiseur Adam sur les features standardisees. Il est evalue avec
+le meme decoupage que les autres modeles (ou GroupKFold par patient en mode multi) et
+affiche Accuracy, Precision, Recall, F1-score, matrice de confusion et importance des
+features par permutation. L'option de ponderation des classes lui transmet des poids
+d'exemples, calcules uniquement a partir du train. Les scores reels sont calcules dans
+l'application a partir des donnees EEG chargees; aucun score n'est pre-rempli dans la
+documentation.
 
 L'importance des features est estimee pour chaque modele par permutation sur le jeu
 de test : elle mesure la variation du F1 lorsque les valeurs d'une feature sont

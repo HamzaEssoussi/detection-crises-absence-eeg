@@ -9,6 +9,8 @@ from sklearn.preprocessing import StandardScaler
 from sklearn.svm import SVC
 from sklearn.tree import DecisionTreeClassifier
 from sklearn.model_selection import GroupKFold
+from sklearn.neural_network import MLPClassifier
+from sklearn.utils.class_weight import compute_sample_weight
 
 from eeg_app.config import FEATURE_COLS, RANDOM_STATE
 
@@ -44,6 +46,15 @@ def creer_modeles(balanced, modeles_choisis=None):
         "KNN": (KNeighborsClassifier(n_neighbors=5), True),
         "SVM": (SVC(kernel="rbf", random_state=RANDOM_STATE,
                     class_weight=cw), True),
+        "Deep Learning (MLP)": (MLPClassifier(
+            hidden_layer_sizes=(64, 32),
+            activation="relu",
+            solver="adam",
+            alpha=0.001,
+            learning_rate_init=0.001,
+            max_iter=400,
+            random_state=RANDOM_STATE,
+        ), True),
     }
     if modeles_choisis is not None:
         tous = {k: v for k, v in tous.items() if k in modeles_choisis}
@@ -71,6 +82,14 @@ def calculer_importances_permutation(modele, X_test, y_test):
         "Importance": resultat.importances_mean,
         "Ecart-type": resultat.importances_std,
     })
+
+
+def _entrainer_un_modele(modele, X, y, balanced):
+    if balanced and isinstance(modele, MLPClassifier):
+        poids = compute_sample_weight(class_weight="balanced", y=y)
+        modele.fit(X, y, sample_weight=poids)
+    else:
+        modele.fit(X, y)
 
 
 def entrainer_modeles(dataset, test_size, aleatoire, balanced,
@@ -109,7 +128,7 @@ def entrainer_modeles(dataset, test_size, aleatoire, balanced,
     lignes, preds, importances = [], {}, []
     for nom, (modele, scale) in modeles.items():
         Xa, Xb = (X_tr_s, X_te_s) if scale else (X_tr, X_te)
-        modele.fit(Xa, y_tr)
+        _entrainer_un_modele(modele, Xa, y_tr, balanced)
         y_pred = modele.predict(Xb)
         preds[nom] = y_pred
         lignes.append({"Modele": nom, **calculer_metriques(y_te, y_pred)})
@@ -190,7 +209,7 @@ def entrainer_modeles_groupkfold(dataset, modeles_choisis=None, balanced=True, a
         for nom, (modele, scale) in modeles.items():
             Xa = X_tr_s if scale else X_tr
             Xb = X_te_s if scale else X_te
-            modele.fit(Xa, y_tr)
+            _entrainer_un_modele(modele, Xa, y_tr, balanced)
             y_pred = modele.predict(Xb)
             perm = calculer_importances_permutation(modele, Xb, y_te)
             if perm is not None:
